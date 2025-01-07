@@ -1,10 +1,9 @@
-import NeonTextEffect from '@/components/CustomComponent/Text/NeonText'
-import React from 'react'
+import React from 'react';
+
+import NeonTextEffect from '@/components/CustomComponent/Text/NeonText';
 
 const NeonTextEffectDemo = () => {
-  return (
-    <NeonTextEffect text="Neon" />
-  )
-}
+  return <NeonTextEffect text="Neon" />;
+};
 
-export default NeonTextEffectDemo
+export default NeonTextEffectDemo;

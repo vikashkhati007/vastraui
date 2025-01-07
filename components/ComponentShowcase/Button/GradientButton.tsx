@@ -1,20 +1,21 @@
-import GradientButton from '@/components/CustomComponent/Button/GradientButton'
-import React from 'react'
+import React from 'react';
+
+import GradientButton from '@/components/CustomComponent/Button/GradientButton';
 
 const GradientButtonShowcase = () => {
   return (
-    <section className='flex flex-col gap-5 justify-center items-center'>
-      <GradientButton size="xl" gradient="blue" >
+    <section className="flex flex-col gap-5 justify-center items-center">
+      <GradientButton gradient="blue" size="xl">
         Blue Gradient
       </GradientButton>
-      <GradientButton size="lg" gradient="neonYellow" >
+      <GradientButton gradient="neonYellow" size="lg">
         Neon Yellow Gradient
       </GradientButton>
-      <GradientButton size="lg" gradient="red" >
+      <GradientButton gradient="red" size="lg">
         Red Gradient
       </GradientButton>
-      </section>
-  )
-}
+    </section>
+  );
+};
 
-export default GradientButtonShowcase
+export default GradientButtonShowcase;

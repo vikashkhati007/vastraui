@@ -1,31 +1,36 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 
 interface AuroraEffectProps {
-  title?: string
-  className?: string
-  style?: React.CSSProperties
+  title?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const GradientText: React.FC<AuroraEffectProps> = ({
-  title = "the beautiful aurora",
+  title = 'the beautiful aurora',
   className,
   style,
 }) => {
   return (
-    <div className={`content w-full h-full flex justify-center items-center ` + className} style={style} >
+    <div
+      className={
+        `content w-full h-full flex justify-center items-center ` + className
+      }
+      style={style}
+    >
       <h1 className="title">
         {title}
         <div className="aurora">
-          <div className="aurora__item"></div>
-          <div className="aurora__item"></div>
-          <div className="aurora__item"></div>
-          <div className="aurora__item"></div>
+          <div className="aurora__item" />
+          <div className="aurora__item" />
+          <div className="aurora__item" />
+          <div className="aurora__item" />
         </div>
       </h1>
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap');
 
         :root {
           --clr-1: #00c2ff;
@@ -38,12 +43,11 @@ const GradientText: React.FC<AuroraEffectProps> = ({
           --ls: clamp(-1.75px, -0.25vw, -3.5px);
         }
         body {
-          font-family: "Inter", "DM Sans", Arial, sans-serif;
+          font-family: 'Inter', 'DM Sans', Arial, sans-serif;
         }
-       
       `}</style>
 
-      <style jsx>{`
+      <style>{`
         .content {
           text-align: center;
         }
@@ -87,7 +91,8 @@ const GradientText: React.FC<AuroraEffectProps> = ({
 
         .aurora__item:nth-of-type(1) {
           top: -50%;
-          animation: aurora-border 6s ease-in-out infinite,
+          animation:
+            aurora-border 6s ease-in-out infinite,
             aurora-1 12s ease-in-out infinite alternate;
         }
 
@@ -95,7 +100,8 @@ const GradientText: React.FC<AuroraEffectProps> = ({
           background-color: var(--clr-3);
           right: 0;
           top: 0;
-          animation: aurora-border 6s ease-in-out infinite,
+          animation:
+            aurora-border 6s ease-in-out infinite,
             aurora-2 12s ease-in-out infinite alternate;
         }
 
@@ -103,7 +109,8 @@ const GradientText: React.FC<AuroraEffectProps> = ({
           background-color: var(--clr-2);
           left: 0;
           bottom: 0;
-          animation: aurora-border 6s ease-in-out infinite,
+          animation:
+            aurora-border 6s ease-in-out infinite,
             aurora-3 8s ease-in-out infinite alternate;
         }
 
@@ -111,7 +118,8 @@ const GradientText: React.FC<AuroraEffectProps> = ({
           background-color: var(--clr-4);
           right: 0;
           bottom: -50%;
-          animation: aurora-border 6s ease-in-out infinite,
+          animation:
+            aurora-border 6s ease-in-out infinite,
             aurora-4 24s ease-in-out infinite alternate;
         }
 
@@ -226,8 +234,7 @@ const GradientText: React.FC<AuroraEffectProps> = ({
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default GradientText
-
+export default GradientText;

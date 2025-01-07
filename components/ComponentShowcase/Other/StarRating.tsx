@@ -1,14 +1,15 @@
-"use client"
-import StarRating from '@/components/CustomComponent/Other/StarRating'
-import React from 'react'
+'use client';
+import React from 'react';
+
+import StarRating from '@/components/CustomComponent/Other/StarRating';
 
 const StarRatingComponentDemo = () => {
   return (
-         <StarRating 
-        onChange={(rating) => console.log(`Rated: ${rating} stars`)}
-        defaultValue={0}
-        />
-  )
-}
+    <StarRating
+      defaultValue={0}
+      onChange={(rating) => console.log(`Rated: ${rating} stars`)}
+    />
+  );
+};
 
-export default StarRatingComponentDemo
+export default StarRatingComponentDemo;

@@ -1,32 +1,32 @@
-"use client"
+'use client';
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 
 interface GlowButtonProps {
   /** The content to be rendered inside the button */
-  children: React.ReactNode
+  children: React.ReactNode;
   /** Custom className for additional styling */
-  className?: string
+  className?: string;
   /** Click handler for the button */
-  onClick?: () => void
+  onClick?: () => void;
   /** Width of the button (default: 'auto') */
-  width?: string | number
+  width?: string | number;
   /** Height of the button (default: 'auto') */
-  height?: string | number
+  height?: string | number;
   /** Start color of the gradient in HSL format (default: '344, 54%, 46%') */
-  glowFromColor?: string
+  glowFromColor?: string;
   /** End color of the gradient in HSL format (default: '27, 88%, 64%') */
-  glowToColor?: string
+  glowToColor?: string;
   /** Size of the glow effect in em units (default: 7) */
-  glowSize?: number
+  glowSize?: number;
   /** Blur amount for the glow in em units (default: 3) */
-  glowBlur?: number
+  glowBlur?: number;
   /** Maximum opacity of the glow effect (default: 0.75) */
-  glowOpacity?: number
+  glowOpacity?: number;
   /** Font size in rem + vmin (default: 1) */
-  fontSize?: number
+  fontSize?: number;
   /** Show wireframe toggle (default: true) */
-  showWireframeToggle?: boolean
+  showWireframeToggle?: boolean;
 }
 
 export const GlowButton: React.FC<GlowButtonProps> = ({
@@ -43,46 +43,58 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
   fontSize = 1,
   showWireframeToggle = false,
 }) => {
-  const [glowPosition, setGlowPosition] = useState({ left: '50%', top: '50%' })
-  const [isHovered, setIsHovered] = useState(false)
-  const [isWireframe, setIsWireframe] = useState(false)
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const [glowPosition, setGlowPosition] = useState({ left: '50%', top: '50%' });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isWireframe, setIsWireframe] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const setGlowPositionHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const { left, top, width, height } = event.currentTarget.getBoundingClientRect()
-    const x = ((event.clientX - left) / width) * 100
-    const y = ((event.clientY - top) / height) * 100
-    setGlowPosition({ left: `${x}%`, top: `${y}%` })
-  }
+  const setGlowPositionHandler = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    const { left, top, width, height } =
+      event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - left) / width) * 100;
+    const y = ((event.clientY - top) / height) * 100;
 
-  const handleMouseEnter = () => setIsHovered(true)
-  const handleMouseLeave = () => setIsHovered(false)
+    setGlowPosition({ left: `${x}%`, top: `${y}%` });
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
   useEffect(() => {
-    const button = buttonRef.current
+    const button = buttonRef.current;
+
     if (button) {
-      button.style.setProperty('--glow-left', glowPosition.left)
-      button.style.setProperty('--glow-top', glowPosition.top)
-      button.style.setProperty('--color-glow-from-raw', glowFromColor)
-      button.style.setProperty('--color-glow-to-raw', glowToColor)
-      button.style.setProperty('--glow-size', `${glowSize}em`)
-      button.style.setProperty('--glow-blur', `${glowBlur}em`)
-      button.style.setProperty('--glow-opacity', String(glowOpacity))
+      button.style.setProperty('--glow-left', glowPosition.left);
+      button.style.setProperty('--glow-top', glowPosition.top);
+      button.style.setProperty('--color-glow-from-raw', glowFromColor);
+      button.style.setProperty('--color-glow-to-raw', glowToColor);
+      button.style.setProperty('--glow-size', `${glowSize}em`);
+      button.style.setProperty('--glow-blur', `${glowBlur}em`);
+      button.style.setProperty('--glow-opacity', String(glowOpacity));
     }
-  }, [glowPosition, glowFromColor, glowToColor, glowSize, glowBlur, glowOpacity])
+  }, [
+    glowPosition,
+    glowFromColor,
+    glowToColor,
+    glowSize,
+    glowBlur,
+    glowOpacity,
+  ]);
 
   return (
     <div className="container">
       {showWireframeToggle && (
         <>
-          <label htmlFor="wireframe" className="wireframeLabel">
+          <label className="wireframeLabel" htmlFor="wireframe">
             Toggle wireframe
           </label>
           <input
-            type="checkbox"
-            id="wireframe"
-            className="wireframeToggle"
             checked={isWireframe}
+            className="wireframeToggle"
+            id="wireframe"
+            type="checkbox"
             onChange={(e) => setIsWireframe(e.target.checked)}
           />
         </>
@@ -90,16 +102,16 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
       <button
         ref={buttonRef}
         className={`glowButton ${isHovered ? 'hovered' : ''} ${isWireframe ? 'wireframe' : ''} ${className}`}
-        onMouseMove={setGlowPositionHandler}
+        style={{ width, height }}
+        onClick={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={onClick}
-        style={{ width, height }}
+        onMouseMove={setGlowPositionHandler}
       >
         <p>{children}</p>
       </button>
 
-      <style jsx>{`
+      <style>{`
         @property --glow-left {
           syntax: '<length-percentage>';
           inherits: true;
@@ -134,21 +146,24 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
           contain: content;
           -webkit-tap-highlight-color: transparent;
 
-          --glass-shadows:
-            inset 0 2px 1px 0 hsla(0, 0%, 100%, 0.4),
+          --glass-shadows: inset 0 2px 1px 0 hsla(0, 0%, 100%, 0.4),
             inset 0 2em 2em 0 hsla(0, 0%, 100%, 0.12),
             inset 0 -3px 0.25em 0 hsla(0, 0%, 100%, 0.12),
             inset 0 -0.25em 1em 0 hsla(0, 0%, 100%, 0.12),
             inset 0 -2em 2em 0 hsla(var(--color-background-raw, 0, 0%, 100%), 0.05),
             inset 0 0.25em 0.5em 0 hsla(0, 0%, 100%, 0.2);
 
-          box-shadow: 
+          box-shadow:
             var(--glass-shadows),
             0 0 5px hsla(var(--color-glow-from-raw), 0.1),
             0 0 15px hsla(var(--color-glow-to-raw), 0.1);
 
-          background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.2), hsla(var(--color-glow-to-raw), 0.2));
-          transition: 
+          background: linear-gradient(
+            60deg,
+            hsla(var(--color-glow-from-raw), 0.2),
+            hsla(var(--color-glow-to-raw), 0.2)
+          );
+          transition:
             transform 0.1s ease-out,
             box-shadow 0.1s ease-out,
             background-color 0.1s ease-out;
@@ -166,7 +181,7 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
         }
 
         .glowButton::after {
-          content: "";
+          content: '';
           width: var(--glow-size);
           height: var(--glow-size);
           position: absolute;
@@ -175,7 +190,11 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
           transform: translate(-50%, -50%);
           z-index: -1;
           border-radius: 50%;
-          background: linear-gradient(60deg, hsl(var(--color-glow-from-raw)), hsl(var(--color-glow-to-raw)));
+          background: linear-gradient(
+            60deg,
+            hsl(var(--color-glow-from-raw)),
+            hsl(var(--color-glow-to-raw))
+          );
           filter: blur(var(--glow-blur));
           opacity: 0;
           transition: opacity 0.2s ease-out;
@@ -186,10 +205,15 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
           opacity: var(--glow-opacity);
         }
 
-        .glowButton:hover, .glowButton:focus {
+        .glowButton:hover,
+        .glowButton:focus {
           transform: translatey(-1px);
-          background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.25), hsla(var(--color-glow-to-raw), 0.25));
-          box-shadow: 
+          background: linear-gradient(
+            60deg,
+            hsla(var(--color-glow-from-raw), 0.25),
+            hsla(var(--color-glow-to-raw), 0.25)
+          );
+          box-shadow:
             var(--glass-shadows),
             0 0 10px hsla(var(--color-glow-from-raw), 0.2),
             0 0 30px hsla(var(--color-glow-to-raw), 0.2);
@@ -197,12 +221,16 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
 
         .glowButton:active {
           transform: translatey(1px) scale(0.98);
-          background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.3), hsla(var(--color-glow-to-raw), 0.3));
-          box-shadow: 
+          background: linear-gradient(
+            60deg,
+            hsla(var(--color-glow-from-raw), 0.3),
+            hsla(var(--color-glow-to-raw), 0.3)
+          );
+          box-shadow:
             var(--glass-shadows),
             0 0 15px hsla(var(--color-glow-from-raw), 0.3),
             0 0 45px hsla(var(--color-glow-to-raw), 0.3);
-          transition: 
+          transition:
             transform 0.05s ease-in,
             box-shadow 0.05s ease-in,
             background-color 0.05s ease-in;
@@ -264,9 +292,12 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
 
         @media (prefers-color-scheme: dark) {
           .glowButton {
-            background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.15), hsla(var(--color-glow-to-raw), 0.15));
-            --glass-shadows:
-              inset 0 2px 1px 0 hsla(0, 0%, 100%, 0.2),
+            background: linear-gradient(
+              60deg,
+              hsla(var(--color-glow-from-raw), 0.15),
+              hsla(var(--color-glow-to-raw), 0.15)
+            );
+            --glass-shadows: inset 0 2px 1px 0 hsla(0, 0%, 100%, 0.2),
               inset 0 2em 2em 0 hsla(0, 0%, 100%, 0.06),
               inset 0 -3px 0.25em 0 hsla(0, 0%, 100%, 0.06),
               inset 0 -0.25em 1em 0 hsla(0, 0%, 100%, 0.06),
@@ -274,18 +305,25 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
               inset 0 0.25em 0.5em 0 hsla(0, 0%, 100%, 0.1);
           }
 
-          .glowButton:hover { 
-            background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.2), hsla(var(--color-glow-to-raw), 0.2));
+          .glowButton:hover {
+            background: linear-gradient(
+              60deg,
+              hsla(var(--color-glow-from-raw), 0.2),
+              hsla(var(--color-glow-to-raw), 0.2)
+            );
           }
 
           .glowButton:active {
-            background: linear-gradient(60deg, hsla(var(--color-glow-from-raw), 0.25), hsla(var(--color-glow-to-raw), 0.25));
+            background: linear-gradient(
+              60deg,
+              hsla(var(--color-glow-from-raw), 0.25),
+              hsla(var(--color-glow-to-raw), 0.25)
+            );
           }
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default GlowButton
-
+export default GlowButton;

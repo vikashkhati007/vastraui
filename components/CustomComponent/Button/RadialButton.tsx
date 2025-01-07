@@ -1,98 +1,112 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect } from 'react'
-import { Home, Search, Star, MoreVertical, RefreshCw, ArrowLeft } from 'lucide-react'
-import { cn } from '@nextui-org/theme'
+import { useState, useRef, useEffect } from 'react';
+import {
+  Home,
+  Search,
+  Star,
+  MoreVertical,
+  RefreshCw,
+  ArrowLeft,
+} from 'lucide-react';
+import { cn } from '@nextui-org/theme';
 
 interface MenuItem {
-  icon: React.ReactNode
-  label: string
+  icon: React.ReactNode;
+  label: string;
 }
 
 interface RadialMenuProps {
-  items?: MenuItem[]
-  className?: string
-  darkMode?: boolean
-  onChange?: (index: number) => void
+  items?: MenuItem[];
+  className?: string;
+  darkMode?: boolean;
+  onChange?: (index: number) => void;
 }
 
-export default function RadialMenu({ 
+export default function RadialMenu({
   items = [
     { icon: <ArrowLeft className="w-5 h-5" />, label: 'Back' },
     { icon: <Home className="w-5 h-5" />, label: 'Home' },
     { icon: <Search className="w-5 h-5" />, label: 'Search' },
     { icon: <Star className="w-5 h-5" />, label: 'Star' },
     { icon: <MoreVertical className="w-5 h-5" />, label: 'More' },
-    { icon: <RefreshCw className="w-5 h-5" />, label: 'Refresh' }
+    { icon: <RefreshCw className="w-5 h-5" />, label: 'Refresh' },
   ],
   className,
   darkMode = false,
-  onChange
+  onChange,
 }: RadialMenuProps) {
-  const [isActive, setIsActive] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const selectorRef = useRef<HTMLDivElement>(null)
+  const [isActive, setIsActive] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectorRef = useRef<HTMLDivElement>(null);
 
   const handleKnobClick = () => {
-    setIsActive(!isActive)
+    setIsActive(!isActive);
     if (!isActive) {
-      selectorRef.current?.style.setProperty('--angle', '-90deg')
-      setSelectedIndex(0)
+      selectorRef.current?.style.setProperty('--angle', '-90deg');
+      setSelectedIndex(0);
     }
-  }
+  };
 
   const handleItemSelect = (index: number) => {
-    setSelectedIndex(index)
-    onChange?.(index)
-  }
+    setSelectedIndex(index);
+    onChange?.(index);
+  };
 
   useEffect(() => {
     if (selectorRef.current) {
       // Calculate angle based on the number of items (360/6 = 60 degrees per item)
       // Subtract 90 to align with the top position
-      const anglePerItem = 360 / items.length
-      const angle = (selectedIndex * anglePerItem) - 90
-      selectorRef.current.style.setProperty('--angle', `${angle}deg`)
+      const anglePerItem = 360 / items.length;
+      const angle = selectedIndex * anglePerItem - 90;
+
+      selectorRef.current.style.setProperty('--angle', `${angle}deg`);
     }
-  }, [selectedIndex, items.length])
+  }, [selectedIndex, items.length]);
 
   return (
-    <div 
+    <div
       ref={selectorRef}
       className={cn(
-        "selector",
-        isActive && "active",
-        darkMode && "dark",
+        'selector',
+        isActive && 'active',
+        darkMode && 'dark',
         className
       )}
     >
-      <div className="knob" onClick={handleKnobClick} />
+      <div
+        className="knob"
+        role="button"
+        tabIndex={0}
+        onClick={handleKnobClick}
+        onKeyDown={(e) => e.key === 'Enter' && handleKnobClick()}
+      />
       <ul>
         {items.map((item, index) => (
-          <li 
+          <li
             key={index}
-            style={{ 
-              transform: isActive ? `rotate(${index * (360 / items.length)}deg)` : 'none',
-              transitionDelay: isActive ? `${index * 0.05}s` : '0s'
+            style={{
+              transform: isActive
+                ? `rotate(${index * (360 / items.length)}deg)`
+                : 'none',
+              transitionDelay: isActive ? `${index * 0.05}s` : '0s',
             }}
           >
             <span>{item.label}</span>
             <input
-              type="radio"
-              name="choice"
               checked={selectedIndex === index}
+              name="choice"
+              type="radio"
               onChange={() => handleItemSelect(index)}
             />
-            <div className="icon-wrapper">
-              {item.icon}
-            </div>
+            <div className="icon-wrapper">{item.icon}</div>
           </li>
         ))}
       </ul>
 
-      <style jsx>{`
+      <style>{`
         @property --angle {
-          syntax: "<angle>";
+          syntax: '<angle>';
           inherits: true;
           initial-value: -90deg;
         }
@@ -126,9 +140,10 @@ export default function RadialMenu({
           position: relative;
           border-radius: 9999px;
           background: var(--color-dark-grey, hsl(0 0% 95.69%));
-          box-shadow: inset rgba(0, 0, 0, 0.13) 0px 0px 2px -1px,
-                     inset rgba(0, 0, 0, 0.13) 0px 2px 8px -2px,
-                     inset rgba(0, 0, 0, 0.13) 0px 8px 34px -2px;
+          box-shadow:
+            inset rgba(0, 0, 0, 0.13) 0px 0px 2px -1px,
+            inset rgba(0, 0, 0, 0.13) 0px 2px 8px -2px,
+            inset rgba(0, 0, 0, 0.13) 0px 8px 34px -2px;
         }
 
         .selector.dark {
@@ -144,10 +159,11 @@ export default function RadialMenu({
           --border-width: 13;
           --icon-offset: 7;
           --item-opacity: 1;
-          transition: --color-accent-on 0.3s ease 0.2s,
-                    --color-accent-on-darker 0.3s ease 0.2s,
-                    --color-accent-on-code 0.3s ease 0.2s,
-                    --color-accent-on-darker-code 0.3s ease 0.2s;
+          transition:
+            --color-accent-on 0.3s ease 0.2s,
+            --color-accent-on-darker 0.3s ease 0.2s,
+            --color-accent-on-code 0.3s ease 0.2s,
+            --color-accent-on-darker-code 0.3s ease 0.2s;
         }
 
         .selector.active .knob {
@@ -171,8 +187,9 @@ export default function RadialMenu({
           border-radius: 9999px;
         }
 
-        .knob:before, .knob:after {
-          content: "";
+        .knob:before,
+        .knob:after {
+          content: '';
           display: block;
           position: absolute;
         }
@@ -181,16 +198,19 @@ export default function RadialMenu({
           width: 4%;
           height: 14%;
           background: var(--knob-color);
-          box-shadow: 0 0 1px rgba(0, 0, 0, 0.4),
-                     0 0 2px 1px rgba(0, 0, 0, 0.2),
-                     inset 0 1px 2px var(--color-accent-on),
-                     inset 0 -1px 2px var(--color-accent-on-darker),
-                     0 0 calc(var(--is-active)*4px) var(--color-accent-on),
-                     0 0 calc(var(--is-active)*16px) hsl(var(--color-accent-on-code)/0.5);
+          box-shadow:
+            0 0 1px rgba(0, 0, 0, 0.4),
+            0 0 2px 1px rgba(0, 0, 0, 0.2),
+            inset 0 1px 2px var(--color-accent-on),
+            inset 0 -1px 2px var(--color-accent-on-darker),
+            0 0 calc(var(--is-active) * 4px) var(--color-accent-on),
+            0 0 calc(var(--is-active) * 16px)
+              hsl(var(--color-accent-on-code) / 0.5);
           top: 16px;
           border-radius: 9999px;
-          transition: background 0.3s ease,
-                    box-shadow 0.3s ease;
+          transition:
+            background 0.3s ease,
+            box-shadow 0.3s ease;
         }
 
         .knob:hover {
@@ -214,35 +234,45 @@ export default function RadialMenu({
         }
 
         ul:before {
-          content: "";
+          content: '';
           position: absolute;
           width: calc(var(--selector-width) * 1%);
           height: calc(var(--selector-width) * 1%);
           border-radius: 9999px;
           background: var(--inner-bg);
-          transition: width 0.3s ease,
-                    height 0.3s ease,
-                    box-shadow 0.3s ease;
-          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2),
-                     rgba(0, 0, 0, 0.18) 0px 0px 1px -1px inset,
-                     rgba(0, 0, 0, 0.16) 0px 2px 5px -2px inset,
-                     rgba(0, 0, 0, 0.063) 0px 8px 24px -4px inset;
+          transition:
+            width 0.3s ease,
+            height 0.3s ease,
+            box-shadow 0.3s ease;
+          box-shadow:
+            inset 0 0 10px rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.18) 0px 0px 1px -1px inset,
+            rgba(0, 0, 0, 0.16) 0px 2px 5px -2px inset,
+            rgba(0, 0, 0, 0.063) 0px 8px 24px -4px inset;
         }
 
         ul:after {
-          content: "";
+          content: '';
           position: absolute;
-          width: calc(100% + calc(var(--radius) / 9) + calc(var(--border-width) * 2px));
-          height: calc(100% + calc(var(--radius) / 9) + calc(var(--border-width) * 2px));
+          width: calc(
+            100% + calc(var(--radius) / 9) + calc(var(--border-width) * 2px)
+          );
+          height: calc(
+            100% + calc(var(--radius) / 9) + calc(var(--border-width) * 2px)
+          );
           border-radius: 9999px;
           background: var(--border-bg);
-          transition: width 0.35s var(--spring-easing) 0.2s,
-                    height 0.35s var(--spring-easing) 0.2s,
-                    box-shadow 0.35s var(--spring-easing) 0.2s;
-          box-shadow: 0 0 calc(var(--is-active)*2px) hsl(var(--color-accent-on-darker-code)/0.6),
-                     0 0 calc(var(--is-active)*6px) hsl(var(--color-accent-on-code)/0.6),
-                     0 0 0 var(--shadow-width) var(--outer-bg),
-                     var(--shadow);
+          transition:
+            width 0.35s var(--spring-easing) 0.2s,
+            height 0.35s var(--spring-easing) 0.2s,
+            box-shadow 0.35s var(--spring-easing) 0.2s;
+          box-shadow:
+            0 0 calc(var(--is-active) * 2px)
+              hsl(var(--color-accent-on-darker-code) / 0.6),
+            0 0 calc(var(--is-active) * 6px)
+              hsl(var(--color-accent-on-code) / 0.6),
+            0 0 0 var(--shadow-width) var(--outer-bg),
+            var(--shadow);
         }
 
         li {
@@ -258,12 +288,13 @@ export default function RadialMenu({
           align-items: start;
           justify-content: center;
           opacity: var(--item-opacity);
-          transition: transform 0.5s ease,
-                    opacity 0.5s ease;
+          transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
         }
 
         li:before {
-          content: "";
+          content: '';
           position: absolute;
           width: 100%;
           aspect-ratio: 1/1;
@@ -288,7 +319,7 @@ export default function RadialMenu({
           transition: opacity 0.3s ease;
         }
 
-        input[type="radio"] {
+        input[type='radio'] {
           position: absolute;
           width: 100%;
           height: 100%;
@@ -297,11 +328,11 @@ export default function RadialMenu({
           z-index: 1;
         }
 
-        input[type="radio"]:checked + .icon-wrapper {
+        input[type='radio']:checked + .icon-wrapper {
           opacity: 1;
         }
 
-        input[type="radio"]:checked ~ li:before {
+        input[type='radio']:checked ~ li:before {
           filter: blur(12px) opacity(1);
         }
 
@@ -310,5 +341,5 @@ export default function RadialMenu({
         }
       `}</style>
     </div>
-  )
+  );
 }

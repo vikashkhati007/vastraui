@@ -1,10 +1,9 @@
-import RadialMenu from '@/components/CustomComponent/Button/RadialButton'
-import React from 'react'
+import React from 'react';
+
+import RadialMenu from '@/components/CustomComponent/Button/RadialButton';
 
 const RadialButtonShowcase = () => {
-  return (
-     <RadialMenu darkMode/>
-  )
-}
+  return <RadialMenu darkMode />;
+};
 
-export default RadialButtonShowcase
+export default RadialButtonShowcase;

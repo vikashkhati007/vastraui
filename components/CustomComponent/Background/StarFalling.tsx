@@ -1,41 +1,48 @@
-'use client'
+'use client';
 
-import React, { useEffect, useRef, ReactNode } from 'react'
+import React, { useEffect, useRef, ReactNode } from 'react';
 
-const STAR_COUNT = 50
+const STAR_COUNT = 50;
 
 interface StarryBackgroundProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 const StarryBackground: React.FC<StarryBackgroundProps> = () => {
-  const starsRef = useRef<HTMLDivElement>(null)
+  const starsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (starsRef.current) {
-      const stars = starsRef.current.children
-      Array.from(stars).forEach((star) => {
-        const starTailLength = `${Math.floor(Math.random() * 250 + 500) / 100}em`
-        const topOffset = `${Math.floor(Math.random() * 10000) / 100}vh`
-        const fallDuration = `${Math.floor(Math.random() * 6000 + 6000) / 1000}s`
-        const fallDelay = `${Math.floor(Math.random() * 10000) / 1000}s`
+      const stars = starsRef.current.children;
 
-        ;(star as HTMLElement).style.setProperty('--star-tail-length', starTailLength)
-        ;(star as HTMLElement).style.setProperty('--top-offset', topOffset)
-        ;(star as HTMLElement).style.setProperty('--fall-duration', fallDuration)
-        ;(star as HTMLElement).style.setProperty('--fall-delay', fallDelay)
-      })
+      Array.from(stars).forEach((star) => {
+        const starTailLength = `${Math.floor(Math.random() * 250 + 500) / 100}em`;
+        const topOffset = `${Math.floor(Math.random() * 10000) / 100}vh`;
+        const fallDuration = `${Math.floor(Math.random() * 6000 + 6000) / 1000}s`;
+        const fallDelay = `${Math.floor(Math.random() * 10000) / 1000}s`;
+
+        (star as HTMLElement).style.setProperty(
+          '--star-tail-length',
+          starTailLength
+        );
+        (star as HTMLElement).style.setProperty('--top-offset', topOffset);
+        (star as HTMLElement).style.setProperty(
+          '--fall-duration',
+          fallDuration
+        );
+        (star as HTMLElement).style.setProperty('--fall-delay', fallDelay);
+      });
     }
-  }, [])
+  }, []);
 
   return (
-    <div className='w-full h-full'>
+    <div className="w-full h-full">
       <div ref={starsRef} className="stars">
         {[...Array(STAR_COUNT)].map((_, i) => (
           <div key={i} className="star" />
         ))}
       </div>
-      <style jsx>{`
+      <style>{`
         .stars {
           --primary-color: white;
           position: relative;
@@ -62,16 +69,25 @@ const StarryBackground: React.FC<StarryBackgroundProps> = () => {
           border-radius: 50%;
           filter: drop-shadow(0 0 6px currentColor);
           transform: translate3d(104em, 0, 0);
-          animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+          animation:
+            fall var(--fall-duration) var(--fall-delay) linear infinite,
+            tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out
+              infinite;
         }
-        .star::before, .star::after {
+        .star::before,
+        .star::after {
           position: absolute;
           content: '';
           top: 0;
           left: calc(var(--star-width) / -2);
           width: var(--star-width);
           height: 100%;
-          background: linear-gradient(45deg, transparent, currentColor, transparent);
+          background: linear-gradient(
+            45deg,
+            transparent,
+            currentColor,
+            transparent
+          );
           border-radius: inherit;
           animation: blink 2s linear infinite;
         }
@@ -87,11 +103,13 @@ const StarryBackground: React.FC<StarryBackgroundProps> = () => {
           }
         }
         @keyframes tail-fade {
-          0%, 50% {
+          0%,
+          50% {
             width: var(--star-tail-length);
             opacity: 1;
           }
-          70%, 80% {
+          70%,
+          80% {
             width: 0;
             opacity: 0.4;
           }
@@ -107,12 +125,13 @@ const StarryBackground: React.FC<StarryBackgroundProps> = () => {
         }
         @media screen and (max-width: 750px) {
           .star {
-            animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+            animation: fall var(--fall-duration) var(--fall-delay) linear
+              infinite;
           }
         }
-          `}</style>
-        </div>
-      )
-}
+      `}</style>
+    </div>
+  );
+};
 
-export default StarryBackground
+export default StarryBackground;

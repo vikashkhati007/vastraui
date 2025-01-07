@@ -1,47 +1,46 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface Option {
-  id: string
-  label: string
+  id: string;
+  label: string;
 }
 
 interface GlidingRadioButtonProps {
-  options: Option[]
-  initialSelectedId?: string
-  onSelect: (id: string) => void
+  options: Option[];
+  initialSelectedId?: string;
+  onSelect: (id: string) => void;
 }
-
 
 export default function GlidingRadioButton({
   options,
   initialSelectedId = options[0].id,
   onSelect,
 }: GlidingRadioButtonProps) {
-  const [selectedId, setSelectedId] = useState(initialSelectedId)
+  const [selectedId, setSelectedId] = useState(initialSelectedId);
 
   const handleChange = (id: string) => {
-    setSelectedId(id)
-    onSelect(id)
-  }
+    setSelectedId(id);
+    onSelect(id);
+  };
 
   return (
     <div className="relative flex flex-col pl-2">
       {options.map((option) => (
         <div key={option.id} className="relative">
           <input
-            type="radio"
+            checked={selectedId === option.id}
+            className="peer absolute opacity-0 cursor-pointer h-full w-full"
             id={option.id}
             name="radio"
-            checked={selectedId === option.id}
+            type="radio"
             onChange={() => handleChange(option.id)}
-            className="peer absolute opacity-0 cursor-pointer h-full w-full"
           />
           <label
-            htmlFor={option.id}
             className="cursor-pointer p-4 block text-gray-400 transition-colors duration-300 peer-checked:text-[#f7e479]"
+            htmlFor={option.id}
           >
             {option.label}
           </label>
@@ -49,15 +48,15 @@ export default function GlidingRadioButton({
       ))}
       <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-zinc-700 to-transparent">
         <motion.div
-          className="relative h-[33.33%] w-full"
           animate={{
             y:
               selectedId === 'radio-free'
                 ? '0%'
                 : selectedId === 'radio-basic'
-                ? '100%'
-                : '200%',
+                  ? '100%'
+                  : '200%',
           }}
+          className="relative h-[33.33%] w-full"
           transition={{
             type: 'spring',
             stiffness: 300,
@@ -70,5 +69,5 @@ export default function GlidingRadioButton({
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

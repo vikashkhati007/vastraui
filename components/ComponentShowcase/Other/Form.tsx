@@ -1,26 +1,27 @@
-import ModernRegistrationForm from '@/components/CustomComponent/Other/Form'
-import React from 'react'
+import React from 'react';
+
+import ModernRegistrationForm from '@/components/CustomComponent/Other/Form';
 
 const Form = () => {
   return (
     <ModernRegistrationForm
-    mode="night"
-    accentColor="#4f46e5"
-    backgroundColor="#f3f4f6"
-    formBackgroundColor="#ffffff"
-    inputBackgroundColor="#f9fafb"
-    textColor="#111827"
-    placeholderColor="#6b7280"
-    borderColor="#d1d5db"
-    buttonHoverColor="#4338ca"
-    title="Join Us"
-    subtitle="Create your account and start your journey"
-    submitButtonText="Create Account"
-    signInText="Already a member?"
-    signInLinkText="Log in here"
-    signInHref="/login"
-  />
-  )
-}
+      accentColor="#4f46e5"
+      backgroundColor="#f3f4f6"
+      borderColor="#d1d5db"
+      buttonHoverColor="#4338ca"
+      formBackgroundColor="#ffffff"
+      inputBackgroundColor="#f9fafb"
+      mode="night"
+      placeholderColor="#6b7280"
+      signInHref="/login"
+      signInLinkText="Log in here"
+      signInText="Already a member?"
+      submitButtonText="Create Account"
+      subtitle="Create your account and start your journey"
+      textColor="#111827"
+      title="Join Us"
+    />
+  );
+};
 
-export default Form
+export default Form;

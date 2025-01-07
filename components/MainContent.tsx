@@ -1,17 +1,17 @@
-'use client'
-import React, { ReactNode } from 'react'
-import { Button } from "@nextui-org/button"
-import { FaGithub } from "react-icons/fa"
+'use client';
+import React, { ReactNode } from 'react';
+import { Button } from '@nextui-org/button';
+import { FaGithub } from 'react-icons/fa';
 
 interface ComponentWrapperProps {
-  children: ReactNode
-  title: string
-  description: string
-  installCommand: string
-  storybookUrl?: string
-  sourceUrl?: string
-  stylesSourceUrl?: string
-  packageName?: string
+  children: ReactNode;
+  title: string;
+  description: string;
+  installCommand: string;
+  storybookUrl?: string;
+  sourceUrl?: string;
+  stylesSourceUrl?: string;
+  packageName?: string;
 }
 
 export default function ComponentWrapper({
@@ -22,7 +22,7 @@ export default function ComponentWrapper({
   storybookUrl,
   sourceUrl,
   stylesSourceUrl,
-  packageName
+  packageName,
 }: ComponentWrapperProps) {
   return (
     <main className="flex-1 p-4 sm:p-6 overflow-auto">
@@ -35,12 +35,12 @@ export default function ComponentWrapper({
           {storybookUrl && (
             <Button
               as="a"
-              href={storybookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               color="secondary"
-              variant="flat"
+              href={storybookUrl}
+              rel="noopener noreferrer"
               startContent={<span className="text-pink-500">S</span>}
+              target="_blank"
+              variant="flat"
             >
               Storybook
             </Button>
@@ -53,12 +53,12 @@ export default function ComponentWrapper({
           {sourceUrl && (
             <Button
               as="a"
-              href={sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               color="default"
-              variant="flat"
+              href={sourceUrl}
+              rel="noopener noreferrer"
               startContent={<FaGithub />}
+              target="_blank"
+              variant="flat"
             >
               Source
             </Button>
@@ -66,12 +66,12 @@ export default function ComponentWrapper({
           {stylesSourceUrl && (
             <Button
               as="a"
-              href={stylesSourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               color="default"
-              variant="flat"
+              href={stylesSourceUrl}
+              rel="noopener noreferrer"
               startContent={<FaGithub />}
+              target="_blank"
+              variant="flat"
             >
               Styles source
             </Button>
@@ -84,11 +84,9 @@ export default function ComponentWrapper({
             <code>{installCommand}</code>
           </div>
         </div>
-        
-        <div className="mt-8">
-          {children}
-        </div>
+
+        <div className="mt-8">{children}</div>
       </div>
     </main>
-  )
+  );
 }

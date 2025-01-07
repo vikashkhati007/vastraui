@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 
@@ -19,66 +19,67 @@ export default function GradientSearchInput({
 }: GradientSearchInputProps) {
   return (
     <>
-      <div id="search-container" className={className}>
-        <div className="nebula"></div>
-        <div className="starfield"></div>
-        <div className="cosmic-dust"></div>
-        <div className="cosmic-dust"></div>
-        <div className="cosmic-dust"></div>
+      <div className={className} id="search-container">
+        <div className="nebula" />
+        <div className="starfield" />
+        <div className="cosmic-dust" />
+        <div className="cosmic-dust" />
+        <div className="cosmic-dust" />
 
-        <div className="stardust"></div>
+        <div className="stardust" />
 
-        <div className="cosmic-ring"></div>
+        <div className="cosmic-ring" />
 
         <div id="main">
           <input
             className="input"
             name={inputName}
-            type="text"
             placeholder={placeholder}
+            type="text"
             value={value}
             onChange={onChange}
           />
 
-          <div id="cosmic-glow"></div>
+          <div id="cosmic-glow" />
 
-          <div className="wormhole-border"></div>
+          <div className="wormhole-border" />
           <div id="wormhole-icon">
             <svg
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              stroke="#a9c7ff"
               fill="none"
               height="24"
-              width="24"
+              stroke="#a9c7ff"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               viewBox="0 0 24 24"
+              width="24"
             >
-              <circle r="10" cy="12" cx="12"></circle>
-              <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              ></path>
-              <path d="M2 12h20"></path>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              <path d="M2 12h20" />
             </svg>
           </div>
 
           <div id="search-icon">
             <svg
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth={2}
-              stroke="url(#cosmic-search)"
               fill="none"
               height="24"
-              width="24"
+              stroke="url(#cosmic-search)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
               viewBox="0 0 24 24"
+              width="24"
             >
-              <circle r="8" cy="11" cx="11"></circle>
-              <line y2="16.65" x2="16.65" y1="21" x1="21"></line>
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" x2="16.65" y1="21" y2="16.65" />
               <defs>
-                <linearGradient gradientTransform="rotate(45)" id="cosmic-search">
-                  <stop stopColor="#a9c7ff" offset="0%"></stop>
-                  <stop stopColor="#6e8cff" offset="100%"></stop>
+                <linearGradient
+                  gradientTransform="rotate(45)"
+                  id="cosmic-search"
+                >
+                  <stop offset="0%" stopColor="#a9c7ff" />
+                  <stop offset="100%" stopColor="#6e8cff" />
                 </linearGradient>
               </defs>
             </svg>
@@ -86,7 +87,7 @@ export default function GradientSearchInput({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .stardust,
         .cosmic-ring,
         .starfield,
@@ -156,7 +157,7 @@ export default function GradientSearchInput({
         }
 
         .stardust::before {
-          content: "";
+          content: '';
           z-index: -2;
           text-align: center;
           top: 50%;
@@ -187,7 +188,7 @@ export default function GradientSearchInput({
         }
 
         .cosmic-ring::before {
-          content: "";
+          content: '';
           z-index: -2;
           text-align: center;
           top: 50%;
@@ -216,7 +217,7 @@ export default function GradientSearchInput({
         }
 
         .starfield::before {
-          content: "";
+          content: '';
           z-index: -2;
           text-align: center;
           top: 50%;
@@ -283,7 +284,7 @@ export default function GradientSearchInput({
         }
 
         .nebula:before {
-          content: "";
+          content: '';
           z-index: -2;
           text-align: center;
           top: 50%;
@@ -335,7 +336,7 @@ export default function GradientSearchInput({
         }
 
         .wormhole-border::before {
-          content: "";
+          content: '';
           text-align: center;
           top: 50%;
           left: 50%;
@@ -374,5 +375,5 @@ export default function GradientSearchInput({
         }
       `}</style>
     </>
-  )
+  );
 }
