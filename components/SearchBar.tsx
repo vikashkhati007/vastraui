@@ -16,8 +16,7 @@ interface SearchItem {
   type: 'recent' | 'result';
 }
 
-export default function SearchBar() {
-  // console.log(window.location.origin);
+export default function SearchBar({mode}: {mode: 'home' | 'component'}) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSearches] = useState<SearchItem[]>([
@@ -29,9 +28,9 @@ export default function SearchBar() {
       type: 'recent',
     },
     {
-      name: 'Background',
-      href: '/background/noisy',
-      title: 'Noisy Background',
+      name: 'Star Falling ',
+      href: '/background/starfalling',
+      title: 'Star Falling Background',
       description: 'A simple background component with noisy effect.',
       type: 'recent',
     },
@@ -120,7 +119,7 @@ export default function SearchBar() {
                       {searchResults.map((item) => (
                         <Link
                           key={item.href}
-                          href={`${window.location.origin}/component${item.href}`}
+                          href={`${mode === 'home' ? `/component${item.href}`: `/component${item.href}`}`}
                           onClick={() => setIsOpen(false)}
                         >
                           <SearchResultItem
@@ -144,7 +143,7 @@ export default function SearchBar() {
                     {recentSearches.map((item) => (
                       <Link
                         key={item.href}
-                        href={`${window.location.origin}/${item.href}`}
+                        href={`${mode === 'home' ? `/component${item.href}` : `/component${item.href}`}`}
                         onClick={() => setIsOpen(false)}
                       >
                         <SearchResultItem item={item} />

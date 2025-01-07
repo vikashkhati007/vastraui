@@ -61,7 +61,7 @@ export default function NavbarComponent({ onMenuToggle, mode }: { onMenuToggle?:
           </Button>
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">
-         <SearchBar/>
+         <SearchBar mode={mode}/>
         </NavbarItem>
         <NavbarItem className="flex gap-2 justify-center items-center">
           <Link href={socialdetails.twitterLink} aria-label="Twitter" className="hidden sm:flex">
