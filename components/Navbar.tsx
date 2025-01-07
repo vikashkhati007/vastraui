@@ -1,43 +1,29 @@
-'use client';
+"use client";
 
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from '@nextui-org/navbar';
-import { Button } from '@nextui-org/button';
-import Link from 'next/link';
-import { FaTwitter, FaDiscord, FaGithub, FaBars } from 'react-icons/fa';
+ } from "@nextui-org/navbar"
+import { Button } from "@nextui-org/button"
+import Link from "next/link"
+import { FaTwitter, FaDiscord, FaGithub, FaBars } from "react-icons/fa"
+import { ThemeSwitch } from "./theme-switch"
+import SearchBar from "./SearchBar"
+import { socialdetails } from "@/config/social"
 
-import { ThemeSwitch } from './theme-switch';
-import SearchBar from './SearchBar';
-
-import { socialdetails } from '@/config/social';
-
-export default function NavbarComponent({
-  onMenuToggle,
-  mode,
-}: {
-  onMenuToggle?: () => void;
-  mode: 'home' | 'component';
-}) {
+export default function NavbarComponent({ onMenuToggle, mode }: { onMenuToggle?: () => void, mode: 'home' | 'component' }) {
   return (
-    <Navbar className="border-b border-divider" maxWidth="full">
-      {mode === 'component' && (
-        <NavbarContent className="sm:hidden" justify="start">
-          <Button isIconOnly variant="light" onClick={onMenuToggle}>
-            <FaBars />
-          </Button>
-        </NavbarContent>
-      )}
+    <Navbar maxWidth="full" className="border-b border-divider">
+     {mode === "component" && <NavbarContent className="sm:hidden" justify="start">
+        <Button isIconOnly variant="light" onClick={onMenuToggle}>
+          <FaBars />
+        </Button>
+      </NavbarContent>}
       <NavbarBrand>
-        <Link
-          aria-label="Vastra UI"
-          className="text-black dark:text-white"
-          href="/"
-        >
-          <p className="font-bold text-inherit">Vastra UI</p>
+        <Link href="/" className="text-black dark:text-white" aria-label="Vastra UI">
+        <p className="font-bold text-inherit">Vastra UI</p>
         </Link>
         {/* <Dropdown>
           <DropdownTrigger>
@@ -54,52 +40,44 @@ export default function NavbarComponent({
            </DropdownMenu>
         </Dropdown> */}
       </NavbarBrand>
-      {mode === 'component' && (
+      {mode === 'component' &&
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Docs
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link aria-current="page" color="foreground" href="/component">
-              Components
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
-      )}
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Docs
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/component" aria-current="page">
+            Components
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      }
       <NavbarContent justify="end">
         <NavbarItem className="hidden sm:flex">
-          <Button color="success" size="sm" variant="flat">
+          <Button variant="flat" color="success" size="sm">
             In Beta 🚀
           </Button>
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">
-          <SearchBar />
+         <SearchBar/>
         </NavbarItem>
         <NavbarItem className="flex gap-2 justify-center items-center">
-          <Link
-            aria-label="Twitter"
-            className="hidden sm:flex"
-            href={socialdetails.twitterLink}
-          >
+          <Link href={socialdetails.twitterLink} aria-label="Twitter" className="hidden sm:flex">
             <FaTwitter className="text-default-500" />
           </Link>
-          <Link
-            aria-label="Discord"
-            className="hidden sm:flex"
-            href={socialdetails.discordLink}
-          >
+          <Link href={socialdetails.discordLink} aria-label="Discord" className="hidden sm:flex">
             <FaDiscord className="text-default-500" />
           </Link>
-          <Link aria-label="Github" href={socialdetails.githubLink}>
+          <Link href={socialdetails.githubLink} aria-label="Github">
             <FaGithub className="text-default-500" />
           </Link>
-          <Button isIconOnly aria-label="Toggle theme" variant="light">
-            <ThemeSwitch />
+          <Button isIconOnly variant="light" aria-label="Toggle theme">
+            <ThemeSwitch/>
           </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
-  );
+  )
 }
