@@ -132,7 +132,7 @@ export default function Testimonials() {
   const repeatedTestimonials = [...testimonials, ...testimonials];
 
   return (
-    <section className="py-24 px-4 bg-white text-black dark:bg-black dark:text-white overflow-hidden">
+    <section className="py-24 px-4 bg-white text-black dark:bg-black dark:text-white overflow-hidden w-full">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h2 className="text-4xl md:text-6xl font-bold text-center mb-6">

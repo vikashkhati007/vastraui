@@ -29,7 +29,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <main
             className={clsx(
-              'container mx-auto max-w-7xl flex-grow',
+              'container mx-auto max-w-full flex-grow',
               myFont.variable
             )}
           >

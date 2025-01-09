@@ -6,7 +6,7 @@ interface ComponentLayoutProps {
 
 export default function ComponentLayout({
   children,
-}: ComponentLayoutProps): JSX.Element {
+}: ComponentLayoutProps) {
   return <ClientSideLayout>{children}</ClientSideLayout>;
 }
 
