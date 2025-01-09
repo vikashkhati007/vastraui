@@ -46,7 +46,7 @@ export function ClientSideLayout({ children }: ClientSideLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background w-full">
       <NavbarComponent mode="component" onMenuToggle={toggleSidebar} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} />
